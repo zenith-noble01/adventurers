@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Detail</title>
+</head>
+<body>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    *{
+        margin: 0;padding: 0;
+        font-family: "poppins";
+    }
+body{
+    background: rgb(245, 245, 242);
+    text-align: center;
+}
+.topnav{
+    background-color: rgb(66, 61, 61);
+    overflow: hidden;
+}
+.topnav a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    float: left;
+    height: 100%;
+}
+.topnav a:hover{
+    background-color: #ddd;
+    color: black;
+    font-size: 18px; 
+}
+.topnav a.active{
+    background-color: #c49f86;
+    color: white;
+    height: 100%;
+}
+button{
+    height: 35px;
+    width: 120px;
+    border-radius: 45%;
+    border: none;
+    background: rgb(153, 153, 192);
+}
+button:hover{
+    height: 35px;
+    width: 120px;
+    border-radius: 45%;
+    border: none;
+    background: rgb(222, 222, 231);
+}
+    </style>
+    <div class="topnav">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'school_page' school_name %}">School Page</a>
+        <a href="{% url 'admission' school_name %}">Admission</a>
+    </div>
+    <div class="container">
+    {% if images %}
+    <p>{{stud_admission.description}}</p>
+    {% for detail in details %}
+    <img src="{{detail.image.url}}" alt="{{detail.title}}">
+    <p>{{detail.title}}</p>
+    {% endfor %}
+    {% else %}
+    <p>No images have being uploaded by this student</p>
+    {% endif %}
+    </div>
+    <a style="margin: 10px 30px 0px 0px;" href="{% url 'accept_admission' stud_admission.id %}"><button>Accept</button></a>
+    <a style="margin: 10px 0px 0px 30px" href="{% url 'refuse_admission' stud_admission.id %}"><button>Refuse</button></a>
+
+</body>
+</html>

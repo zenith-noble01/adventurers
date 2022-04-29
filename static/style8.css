@@ -1,0 +1,38 @@
+div{
+    border-radius: 5px;
+}
+#admission{
+    width: 96%;
+    margin: 0% 2%;
+    
+}
+.stud_admin{
+    float: left;
+    width: 45%;
+    margin: 20px 2%;
+    height: 270px;
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+    display: flex;
+}
+.stud_img{
+    width: 34%;
+    height: 100%;
+    float: left;
+}
+.stud_des{
+    width: 64%;
+    height: 100%;
+    float: left;
+  
+}
+img{
+    margin: 0px;
+    border-radius: 50%;
+}
+p, h3{
+    text-align: center;
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+}

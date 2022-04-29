@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    *{
+    margin: 0;padding: 0;
+    font-family: "poppins";
+    }
+        body{
+            background: rgb(245, 245, 242);
+        }
+        .nav_bar{
+            height: 50px;
+            margin: 0;
+        }
+        .home-container {
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+        }
+        .button1{
+            float: right;
+            width: 150px;
+            height: 40px;
+            background: rgb(203, 203, 214);
+            border-radius: 5%;
+            border-color: rgb(203, 203, 214);
+            margin: 10px 10px 0px 0px;
+        }
+        .search_div{
+            width: 100%;
+            height: 100px;
+        }
+        .search{
+            width: 35%;
+            height: 35px;
+            margin: 40px 0px 20px 35%;
+            float: left;
+        }
+    .button2{
+        height: 42px;
+        width:35px;
+        margin: 40px 25% 20px 0px;
+        float: left;
+        background: white;
+    }
+    .search-img{
+        width: 100%;
+        height: 100%;
+    }
+    .school_logo{
+        text-align: center;
+    }
+    </style>
+    <div class="nav_bar">
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}"><button class="button1">logout</button></a>
+    {% else %}
+    <a href="{% url 'login' %}"><button class="button1">login</button></a>
+    {% endif %}
+    </div>
+    <div class="search_div">
+    <form action="" method="GET" >
+            <input class="search" type="text" name="f" placeholder="Seach School...">
+            <button class="button2"><img class="search-img"src="{% static 'téléchargement (5).png' %}"></button>
+        </form>
+        </div>
+       <!-- <form class="d-flex" action="" method="GET">
+            <input class="control-form " type="text" name="f" placeholder="Search School..." aria-label="Search">
+            <button class="button2" type="submit">
+        </form>-->
+    <h1>You are welcome to our webpage {{request.user.username}}</h1>
+
+    <div class="home-container">
+        
+        <div>
+            <h2 style="text-align:center;">School name</h2>
+        <div>
+            <a href="{% url 'home' %}"><h3>All</h3></a>
+        </div>
+        {% for school in school_names %}
+        <div>
+        <h3 style="font-size: 12px;margin: 5px 0px 5px 0px;"><a href="{% url 'home' %}?f={{school.school_name}}">{{school.school_name}}</a></h3><br>
+        </div>
+        {% endfor %}
+        </div>
+        <div>
+            <h2 style="text-align:center;">The differnt school in our webpage</h2>
+            <!--<div style="width: 48%; float: left; margin: 0px 0px 0px 10px">
+                <img src="{% static 'image2.jpg' %}" alt="school name" width="95%" height="250px">
+                <hr>
+                <div><h2 style="text-align: center;">school name</h2></div>
+            </div>-->
+            {% for school in schools %}
+            <a href="{% url 'school_page' school.school_name %}">
+            <div class="school_logo" style="width: 19%; float: left;  margin: 10px 0px 10px 10px; height: 150px; background: rgb(245, 245, 242);">
+                <img src="{{school.school_image.url}}" alt="school name" width="80%" height="80%">
+                <div><h2 style="text-align: center;font-size: 12px;">{{school.school_name}}</h2></div>
+            </div></a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

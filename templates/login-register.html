@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page}}</title>
+</head>
+<body>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if page == 'login' %}
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter Username" />
+
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter Password" />
+
+        <a href="{% url 'register' %}">Register</a>
+        <input type="submit" value="Login" />
+    </form>
+    {% else %}
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <a href="{% url  'login' %}">Login</a>
+        <input type="submit" value="Register" />
+    </form>
+    {% endif %}
+</body>
+</html>
